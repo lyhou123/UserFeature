@@ -10,7 +10,6 @@ public record UserRequest(
         String firstName,
         String lastName,
         String gender,
-        @NonNull
         String email,
         String phoneNumber,
         String avatar,
