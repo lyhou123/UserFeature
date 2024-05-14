@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserRespone updateUser(@RequestBody UserRequest userRequest, Long id) {
+    public UserRespone updateUser(@RequestBody UserRequest userRequest, String id) {
 
         var useId = userRepository.findById(id).orElseThrow(()->
                 new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserRespone deleteUser(Long id) {
+    public UserRespone deleteUser(String  id) {
         var userId = userRepository.findById(id)
                 .orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found"));
 

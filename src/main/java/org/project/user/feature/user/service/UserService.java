@@ -10,7 +10,7 @@ public interface UserService {
 
     UserRespone createUser(UserRequest userRequest);
 
-    UserRespone updateUser(UserRequest userRequest, Long id);
+    UserRespone updateUser(UserRequest userRequest, String id);
 
-    UserRespone deleteUser(Long id);
+    UserRespone deleteUser(String id);
 }

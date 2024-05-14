@@ -1,7 +1,8 @@
 package org.project.user.mapper;
 
 import org.mapstruct.*;
-import org.project.user.domain.user.User;
+import org.project.user.domain.User;
+
 import org.project.user.feature.user.dto.UserRequest;
 import org.project.user.feature.user.dto.UserRespone;
 

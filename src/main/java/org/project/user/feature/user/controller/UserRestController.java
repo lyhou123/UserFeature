@@ -1,12 +1,9 @@
 package org.project.user.feature.user.controller;
-
 import lombok.RequiredArgsConstructor;
 import org.project.user.feature.user.dto.UserRequest;
 import org.project.user.feature.user.dto.UserRespone;
-import org.project.user.feature.user.repository.UserRepository;
 import org.project.user.feature.user.service.UserService;
-import org.project.user.mapper.UserMapper;
-import org.project.user.utils.BaseRespone;
+import org.project.user.utils.BaseResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,33 +16,32 @@ public class UserRestController {
     private final UserService service;
 
     @GetMapping
-    public BaseRespone<List<UserRespone>> getUser()
+    public BaseResponse<List<UserRespone>> getUser()
     {
-        return BaseRespone.<List<UserRespone>>readSuccess()
+        return BaseResponse.<List<UserRespone>>readSuccess()
                 .setPayload(service.getAllUsers());
     }
 
     @PostMapping
-    public BaseRespone<UserRespone> createUser(@RequestBody UserRequest userRequest)
+    public BaseResponse<UserRespone> createUser(@RequestBody UserRequest userRequest)
     {
-              return BaseRespone.<UserRespone>createSuccess()
+              return BaseResponse.<UserRespone>createSuccess()
                       .setPayload(service.createUser(userRequest));
     }
 
 
     @PutMapping("/{id}")
-    public BaseRespone<UserRespone> updateUser(@RequestBody UserRequest userRequest,@PathVariable Long id)
+    public BaseResponse<UserRespone> updateUser(@RequestBody UserRequest userRequest, @PathVariable String id)
     {
-        return BaseRespone.<UserRespone>updateSuccess()
+        return BaseResponse.<UserRespone>updateSuccess()
                 .setPayload(service.updateUser(userRequest,id));
     }
 
     @DeleteMapping("/{id}")
-    public BaseRespone<UserRespone> deleteUser(@PathVariable Long id)
+    public BaseResponse<UserRespone> deleteUser(@PathVariable String id)
     {
-        return BaseRespone.<UserRespone>deleteSuccess()
+        return BaseResponse.<UserRespone>deleteSuccess()
                 .setPayload(service.deleteUser(id));
     }
-
 
 }

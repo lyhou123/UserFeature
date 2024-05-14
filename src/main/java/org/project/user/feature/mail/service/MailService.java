@@ -6,4 +6,6 @@ import org.project.user.feature.mail.dto.MailRespone;
 
 public interface MailService {
    MailRespone sendMail(MailRequest mailRequest) throws MessagingException;
+   void sendOtpEmail(String email, String otp) throws MessagingException;
+
 }

@@ -10,36 +10,36 @@ import org.springframework.http.HttpStatus;
 @Getter
 @NoArgsConstructor
 @Accessors(chain = true)
-public class BaseRespone<T>{
+public class BaseResponse<T>{
     private int status;
     private String message;
     private Object metadata;
     private T payload;
 
-    public static <T> BaseRespone<T> createSuccess()
+    public static <T> BaseResponse<T> createSuccess()
     {
-        return new BaseRespone<T>()
+        return new BaseResponse<T>()
                 .setMessage("Created Successfully!!! ")
                 .setStatus(HttpStatus.CREATED.value());
     }
 
-    public static <T> BaseRespone<T> readSuccess()
+    public static <T> BaseResponse<T> readSuccess()
     {
-        return new BaseRespone<T>()
+        return new BaseResponse<T>()
                 .setMessage("Read Successfully!!! ")
                 .setStatus(HttpStatus.OK.value());
     }
 
-    public static <T> BaseRespone<T> updateSuccess()
+    public static <T> BaseResponse<T> updateSuccess()
     {
-        return new BaseRespone<T>()
+        return new BaseResponse<T>()
                 .setMessage("Updated Successfully!!! ")
                 .setStatus(HttpStatus.OK.value());
     }
 
-    public static <T> BaseRespone<T> deleteSuccess()
+    public static <T> BaseResponse<T> deleteSuccess()
     {
-        return new BaseRespone<T>()
+        return new BaseResponse<T>()
                 .setMessage("Deleted Successfully!!! ")
                 .setStatus(HttpStatus.OK.value());
     }
