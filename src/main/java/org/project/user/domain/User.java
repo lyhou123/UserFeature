@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "al_users")
@@ -55,5 +56,9 @@ public class User {
     //relationship with forget password
     @OneToOne(mappedBy = "user")
     private ForgetPassword forgetPassword;
+
+    //relationship with user role
+    @ManyToMany
+    private Set<Role> roles;
 
 }
