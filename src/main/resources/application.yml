@@ -1,6 +1,18 @@
 spring:
   application:
     name: spring-boot-actuator
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "lyhou282@gmail.com"
+    password: "nizm fijt ltqk mtfi"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   datasource:
     url: jdbc:postgresql://localhost:5432/user
     username: postgres
@@ -16,3 +28,7 @@ spring:
 springdoc:
   swagger-ui:
     path: '/'
+
+    #configuration mailsender
+
+
