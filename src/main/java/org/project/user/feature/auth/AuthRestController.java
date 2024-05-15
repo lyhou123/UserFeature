@@ -55,22 +55,19 @@ public class AuthRestController {
             , requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
             content = @Content(schema = @Schema(implementation = UserRequest.class),
                     examples = @ExampleObject(value = """
-                            {
-                                "firstName": "lyhou",
-                                "lastName": "phiv",
-                                "gender" : "male",
-                                "email": "lyhou123@gamil.com",
-                                "phoneNumber": "0123456789",
-                                "password": "123456",
-                                "avatar": "https://www.google.com",
-                                "isActive": true,
-                                "isDisable": false,
-                                "createdDate": "2021-09-09",
-                             
-                            }
-                                                        
-                                                        
-                            """)
+                {
+                    "firstName": "lyhou",
+                    "lastName": "phiv",
+                    "gender" : "male",
+                    "email": "lyhou123@gmail.com",
+                    "phoneNumber": "0123456789",
+                    "password": "123456",
+                    "avatar": "https://www.google.com",
+                    "isActive": true,
+                    "isDisable": false,
+                    "createdDate": "2021-09-09"
+                }
+            """)
 
             )
     )

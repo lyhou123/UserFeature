@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
     public UserResponse createUser(UserRequest userRequest) {
 
          var user = userMapper.mapToUser(userRequest);
-         user.setPassword(new BCryptPasswordEncoder().encode(userRequest.password()));
+         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userMapper.mapToUserResponse(userRepository.save(user));
 
     }
