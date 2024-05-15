@@ -1,8 +1,9 @@
 package org.project.user.feature.auth;
 
+
 import lombok.RequiredArgsConstructor;
 import org.project.user.feature.auth.dto.AuthRequest;
-import org.project.user.feature.auth.dto.AuthRespone;
+import org.project.user.feature.auth.dto.AuthResponse;
 import org.project.user.feature.auth.dto.RefreshTokenRequest;
 import org.project.user.feature.security.TokenGenerator;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,33 +15,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl {
-
-    private final DaoAuthenticationProvider daoAuthenticationProvider;
+public class AuthServiceImpl implements AuthService{
     private final JwtAuthenticationProvider jwtAuthenticationProvider;
+    private final DaoAuthenticationProvider daoAuthenticationProvider;
     private final TokenGenerator tokenGenerator;
 
-    public AuthRespone login(AuthRequest request) {
+    @Override
+    public AuthResponse login(AuthRequest loginRequest) {
         Authentication authentication = daoAuthenticationProvider
-                .authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                request.email(),
-                                request.password()
-                        )
-                );
+                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.email(), loginRequest.password()));
         return tokenGenerator.generateTokens(authentication);
     }
 
-    public AuthRespone refreshToken(RefreshTokenRequest request) {
-
+    @Override
+    public AuthResponse refresh(RefreshTokenRequest request) {
         Authentication authentication = jwtAuthenticationProvider
-                .authenticate(
-                        new BearerTokenAuthenticationToken(request.refreshToken())
-                );
+                .authenticate(new BearerTokenAuthenticationToken(request.refreshToken()));
         return tokenGenerator.generateTokens(authentication);
-
     }
 
+    @Override
+    public void logout(String refreshToken) {
 
+    }
 
 }

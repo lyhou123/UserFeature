@@ -87,7 +87,7 @@ public class CvServiceImpl implements CvService{
                     contentType + " not  allowed!! ");
         }
         try {
-//       Check if the directory doesn't exist , we will create the directory
+
             Path fileStoragePath = Path.of(fileStorageDir);
             if (!Files.exists(fileStoragePath)) {
                 Files.createDirectories(fileStoragePath);
@@ -95,7 +95,7 @@ public class CvServiceImpl implements CvService{
             String fileName = UUID.randomUUID() + "." +
                     Objects.requireNonNull(file.getOriginalFilename())
                             .split("\\.")[1];
-            // handle if there are more than one dot !
+
 
             Files.copy(file.getInputStream(),
                     fileStoragePath.resolve(fileName),

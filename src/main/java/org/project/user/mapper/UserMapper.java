@@ -13,7 +13,6 @@ public interface UserMapper {
 
     User mapToUser(UserRequest userRequest);
 
-    //update user
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateUserFromRequest(@MappingTarget User user, UserRequest userRequest);
 }

@@ -7,9 +7,11 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import lombok.RequiredArgsConstructor;
-import org.project.user.feature.security.CustomDetailService;
+
+import org.project.user.feature.security.CustomUserDetails;
 import org.project.user.feature.security.JwtToUserConverter;
 import org.project.user.feature.security.KeyUtils;
+import org.project.user.feature.security.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +39,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
 
-    private final CustomDetailService customDetailService;
+    private final UserDetailServiceImpl customDetailService;
 
     private final JwtToUserConverter jwtToUserConverter;
 
@@ -71,7 +73,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
-//                .httpBasic(AbstractHttpConfigurer::disable)
+
                 .oauth2ResourceServer(oauth2ResourceServer ->
                         oauth2ResourceServer.jwt(jwt ->
                                 jwt.jwtAuthenticationConverter(jwtToUserConverter))

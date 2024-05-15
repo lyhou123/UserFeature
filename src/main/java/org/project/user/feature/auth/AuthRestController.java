@@ -1,79 +1,61 @@
 package org.project.user.feature.auth;
 
+
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.project.user.feature.auth.dto.AuthRequest;
-import org.project.user.feature.auth.dto.AuthRespone;
+import org.project.user.feature.auth.dto.AuthResponse;
 import org.project.user.feature.auth.dto.RefreshTokenRequest;
 import org.project.user.feature.user.dto.UserRequest;
-import org.project.user.feature.user.dto.UserResponse;
 import org.project.user.feature.user.service.UserService;
 import org.project.user.utils.BaseResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 
 @RestController
-
-@RequestMapping("api/v1/auth")
-@RequiredArgsConstructor
+@RequestMapping("/api/v1/auth")
 @SecurityRequirements(value = {})
+@RequiredArgsConstructor
 public class AuthRestController {
-
-    private final AuthServiceImpl authService;
-
+    private final AuthService authService;
     private final UserService userService;
 
-    @PostMapping("/login")
-    public BaseResponse<AuthRespone> login(@RequestBody AuthRequest authRequest)
-    {
-        return BaseResponse.<AuthRespone>readSuccess()
-                .setPayload(authService.login(authRequest));
+    @PostMapping("/register")
+    @Operation(summary = "Register user")
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserRequest userRequest) {
+        try {
+            return ResponseEntity.ok(BaseResponse.createSuccess()
+                    .setPayload(userService.createUser(userRequest)));
+        } catch (ConstraintViolationException ex) {
+            HashMap<String, Object> errors = new HashMap<>();
+            for (ConstraintViolation<?> violation : ex.getConstraintViolations()) {
+                errors.put(violation.getPropertyPath().toString(), violation.getMessage());
+            }
+            return ResponseEntity.badRequest().body(BaseResponse.createSuccess().setMetadata(errors));
+        }
     }
 
-   @PostMapping("/signup")
-    public String signup()
-    {
-        return "signup";
+    @PostMapping("/login")
+    @Operation(summary = "Login")
+    public BaseResponse<AuthResponse> login(@RequestBody AuthRequest request) {
+        return BaseResponse.<AuthResponse>readSuccess()
+                .setPayload(authService.login(request));
     }
 
     @PostMapping("/refresh")
-    public BaseResponse<AuthRespone> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest)
-    {
-        return BaseResponse.<AuthRespone>readSuccess()
-                .setPayload(authService.refreshToken(refreshTokenRequest));
+    @Operation(summary = "Refresh token")
+    public BaseResponse<AuthResponse> refreshToken( @RequestBody RefreshTokenRequest request) {
+        return BaseResponse.<AuthResponse>readSuccess()
+                .setPayload(authService.refresh(request));
     }
 
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Register new user"
-            , requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            content = @Content(schema = @Schema(implementation = UserRequest.class),
-                    examples = @ExampleObject(value = """
-                {
-                    "firstName": "lyhou",
-                    "lastName": "phiv",
-                    "gender" : "male",
-                    "email": "lyhou123@gmail.com",
-                    "phoneNumber": "0123456789",
-                    "password": "123456",
-                    "avatar": "https://www.google.com",
-                    "isActive": true,
-                    "isDisable": false
-                }
-            """)
-
-            )
-    )
-    )
-    public BaseResponse<UserResponse> registerUser(
-            @Valid @RequestBody UserRequest userRequest) {
-        return BaseResponse.<UserResponse>createSuccess()
-                .setPayload(userService.createUser(userRequest));
-    }
 }

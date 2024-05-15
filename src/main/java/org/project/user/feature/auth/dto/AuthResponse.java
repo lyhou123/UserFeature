@@ -3,10 +3,7 @@ package org.project.user.feature.auth.dto;
 import lombok.Builder;
 
 @Builder
-public record AuthRespone(
+public record AuthResponse(String userId,
         String accessToken,
-        String refreshToken,
-        String email,
-        String userId
-) {
+        String refreshToken) {
 }
