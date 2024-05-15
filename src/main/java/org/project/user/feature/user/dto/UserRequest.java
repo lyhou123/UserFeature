@@ -12,6 +12,7 @@ public record UserRequest(
         String gender,
         String email,
         String phoneNumber,
+        String password,
         String avatar,
         boolean isActive,
         boolean isDisable,

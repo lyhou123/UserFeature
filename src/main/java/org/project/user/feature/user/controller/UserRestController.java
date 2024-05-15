@@ -1,7 +1,7 @@
 package org.project.user.feature.user.controller;
 import lombok.RequiredArgsConstructor;
 import org.project.user.feature.user.dto.UserRequest;
-import org.project.user.feature.user.dto.UserRespone;
+import org.project.user.feature.user.dto.UserResponse;
 import org.project.user.feature.user.service.UserService;
 import org.project.user.utils.BaseResponse;
 import org.springframework.web.bind.annotation.*;
@@ -16,31 +16,31 @@ public class UserRestController {
     private final UserService service;
 
     @GetMapping
-    public BaseResponse<List<UserRespone>> getUser()
+    public BaseResponse<List<UserResponse>> getUser()
     {
-        return BaseResponse.<List<UserRespone>>readSuccess()
+        return BaseResponse.<List<UserResponse>>readSuccess()
                 .setPayload(service.getAllUsers());
     }
 
     @PostMapping
-    public BaseResponse<UserRespone> createUser(@RequestBody UserRequest userRequest)
+    public BaseResponse<UserResponse> createUser(@RequestBody UserRequest userRequest)
     {
-              return BaseResponse.<UserRespone>createSuccess()
+              return BaseResponse.<UserResponse>createSuccess()
                       .setPayload(service.createUser(userRequest));
     }
 
 
     @PutMapping("/{id}")
-    public BaseResponse<UserRespone> updateUser(@RequestBody UserRequest userRequest, @PathVariable String id)
+    public BaseResponse<UserResponse> updateUser(@RequestBody UserRequest userRequest, @PathVariable String id)
     {
-        return BaseResponse.<UserRespone>updateSuccess()
+        return BaseResponse.<UserResponse>updateSuccess()
                 .setPayload(service.updateUser(userRequest,id));
     }
 
     @DeleteMapping("/{id}")
-    public BaseResponse<UserRespone> deleteUser(@PathVariable String id)
+    public BaseResponse<UserResponse> deleteUser(@PathVariable String id)
     {
-        return BaseResponse.<UserRespone>deleteSuccess()
+        return BaseResponse.<UserResponse>deleteSuccess()
                 .setPayload(service.deleteUser(id));
     }
 

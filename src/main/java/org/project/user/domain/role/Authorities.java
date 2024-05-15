@@ -1,4 +1,4 @@
-package org.project.user.domain;
+package org.project.user.domain.role;
 
 import jakarta.persistence.*;
 

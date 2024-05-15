@@ -1,10 +1,10 @@
 package org.project.user.feature.user.dto;
 import lombok.Builder;
-import lombok.NonNull;
+
 import java.util.Date;
 
 @Builder
-public record UserRespone(
+public record UserResponse(
         String id,
         String firstName,
         String lastName,

@@ -4,12 +4,12 @@ import org.mapstruct.*;
 import org.project.user.domain.User;
 
 import org.project.user.feature.user.dto.UserRequest;
-import org.project.user.feature.user.dto.UserRespone;
+import org.project.user.feature.user.dto.UserResponse;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserRespone mapToUserResponse(User user);
+    UserResponse mapToUserResponse(User user);
 
     User mapToUser(UserRequest userRequest);
 

@@ -1,16 +1,16 @@
 package org.project.user.feature.user.service;
 
 import org.project.user.feature.user.dto.UserRequest;
-import org.project.user.feature.user.dto.UserRespone;
+import org.project.user.feature.user.dto.UserResponse;
 
 import java.util.List;
 
 public interface UserService {
-    List<UserRespone> getAllUsers();
+    List<UserResponse> getAllUsers();
 
-    UserRespone createUser(UserRequest userRequest);
+    UserResponse createUser(UserRequest userRequest);
 
-    UserRespone updateUser(UserRequest userRequest, String id);
+    UserResponse updateUser(UserRequest userRequest, String id);
 
-    UserRespone deleteUser(String id);
+    UserResponse deleteUser(String id);
 }

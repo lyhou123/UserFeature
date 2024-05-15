@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.project.user.domain.role.Role;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -23,10 +25,15 @@ public class User {
     private String gender;
     private String email;
     private String phoneNumber;
+    private String password;
     private String avatar;
     private boolean isActive;
     private boolean isDisable;
     private Date createdDate;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
 
     @OneToOne(mappedBy = "user")
     private UserDetails userDetails;
