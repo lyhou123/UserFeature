@@ -3,6 +3,8 @@ server:
 file:
   storage-dir: "filestorage/images/"
   client-dir: "/images/**"
+  storage-dir1: "cvStorage/cv/"
+  client-dir1: "/cv/**"
 spring:
   servlet:
     multipart:

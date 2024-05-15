@@ -16,13 +16,15 @@ import java.time.temporal.ChronoUnit;
 
 @Component
 public class TokenGenerator {
-    JwtEncoder jwtRefreshTokenEncoder;
+   JwtEncoder jwtRefreshTokenEncoder;
     JwtEncoder  jwtAccessTokenEncoder;
-     public TokenGenerator(@Qualifier("jwtRefreshTokenEncoder")JwtEncoder jwtRefreshTokenEncoder, JwtEncoder jwtAccessTokenEncoder) {
-         this.jwtAccessTokenEncoder = jwtAccessTokenEncoder;
-         this.jwtRefreshTokenEncoder = jwtRefreshTokenEncoder;
-
-     }
+    public TokenGenerator(
+            JwtEncoder jwtAccessTokenEncoder,
+            @Qualifier("jwtRefreshTokenEncoder") JwtEncoder jwtRefreshTokenEncoder
+    ) {
+        this.jwtAccessTokenEncoder=jwtAccessTokenEncoder;
+        this.jwtRefreshTokenEncoder=jwtRefreshTokenEncoder;
+    }
 
     private String createAccessToken(Authentication authentication)
     {
@@ -33,7 +35,7 @@ public class TokenGenerator {
                 .subject(userDetail.getUsername())
                 .issuer("mobile banking cstad")
                 .expiresAt(now.plus(3, ChronoUnit.HOURS))
-                .id(userDetail.getUser().getId()) //get user id from token to use in the future
+                .id(userDetail.getUser().getId())
                 .issuedAt(now)
                 .build();
 

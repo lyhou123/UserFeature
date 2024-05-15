@@ -1,8 +1,8 @@
-package org.project.user.feature.file;
+package org.project.user.feature.cv;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.project.user.feature.file.dto.FileResponse;
+import org.project.user.feature.cv.dto.CvRespone;
 import org.project.user.utils.BaseResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,33 +12,35 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/cv")
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/files")
-public class FileRestController {
+public class CvController {
 
-    private final FileService fileService;
+    private final CvService cvService;
 
     @PostMapping(value = "", consumes = "multipart/form-data")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponse<FileResponse> uploadSingleFile(
+    public BaseResponse<CvRespone> uploadSingleFile(
             @RequestPart("file") MultipartFile file, HttpServletRequest request
     ) {
         return BaseResponse
-                .<FileResponse>createSuccess()
-                .setPayload(fileService.uploadSingleFile(file, request));
+                .<CvRespone>createSuccess()
+                .setPayload(cvService.uploadSingleFile(file, request));
     }
 
     @PostMapping(value = "/multiple", consumes = "multipart/form-data")
-    public BaseResponse<List<FileResponse>> uploadMultipleFiles(@RequestPart("files") MultipartFile[] files) {
+//    return payload as List<FileResponse>
+    public BaseResponse<List<CvRespone>> uploadMultipleFiles(@RequestPart("files") MultipartFile[] files) {
+//        return fileService.uploadMultipleFiles(files);
         return null;
     }
     @GetMapping("/download/{fileName}")
     public ResponseEntity<?> downloadFile(@PathVariable String fileName, HttpServletRequest request){
-        return fileService.serveFile(fileName,request);
+        return cvService.serveFile(fileName,request);
     }
     @DeleteMapping("{fileName}")
     public String deleteFile(@PathVariable String fileName) {
-        fileService.deleteFile(fileName);
+        cvService.deleteFile(fileName);
         return "file is deleted successfully!";
     }
 }

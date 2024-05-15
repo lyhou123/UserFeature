@@ -1,6 +1,9 @@
 package org.project.user.domain.role;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.project.user.domain.role.Authorities;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -8,6 +11,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "al_role")
+@Setter
+@Getter
+@NoArgsConstructor
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -19,7 +25,7 @@ public class Role implements GrantedAuthority {
         return "ROLE_"+this.roleName;
     }
     @ManyToMany
-    private Set<Authorities> authoritiesSet;
+    private Set<Authorities> authorities;
 
 
 }

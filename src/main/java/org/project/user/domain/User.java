@@ -65,7 +65,7 @@ public class User {
     private ForgetPassword forgetPassword;
 
     //relationship with user role
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
 }

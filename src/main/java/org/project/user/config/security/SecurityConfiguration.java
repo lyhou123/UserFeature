@@ -56,6 +56,8 @@ public class SecurityConfiguration {
                                         "/v2/api-docs/**",
                                         "/swagger-resources/**")
                                 .permitAll()
+                                .requestMatchers("/api/v1/users/**").permitAll()
+                                .requestMatchers("/api/v1/cv/**").permitAll()
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers(
                                         HttpMethod.PATCH,

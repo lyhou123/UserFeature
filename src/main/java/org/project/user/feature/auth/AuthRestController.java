@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.project.user.feature.auth.dto.AuthRequest;
 import org.project.user.feature.auth.dto.AuthRespone;
-import org.project.user.feature.auth.dto.RefresTokenRequest;
+import org.project.user.feature.auth.dto.RefreshTokenRequest;
 import org.project.user.feature.user.dto.UserRequest;
 import org.project.user.feature.user.dto.UserResponse;
 import org.project.user.feature.user.service.UserService;
@@ -42,10 +42,10 @@ public class AuthRestController {
     }
 
     @PostMapping("/refresh")
-    public BaseResponse<AuthRespone> refreshToken(@RequestBody RefresTokenRequest refresTokenRequest)
+    public BaseResponse<AuthRespone> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest)
     {
         return BaseResponse.<AuthRespone>readSuccess()
-                .setPayload(authService.refreshToken(refresTokenRequest));
+                .setPayload(authService.refreshToken(refreshTokenRequest));
     }
 
 
@@ -64,8 +64,7 @@ public class AuthRestController {
                     "password": "123456",
                     "avatar": "https://www.google.com",
                     "isActive": true,
-                    "isDisable": false,
-                    "createdDate": "2021-09-09"
+                    "isDisable": false
                 }
             """)
 

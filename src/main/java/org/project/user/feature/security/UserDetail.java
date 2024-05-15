@@ -18,22 +18,18 @@ public class UserDetail implements UserDetails {
 
     private User user;
 
-    //make authority in to this method
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        List<GrantedAuthority> authorities = new ArrayList<>();
-//
-//        user.getRoles().forEach(role -> {
-//            authorities.add(role);
-//            role.getAuthorities().forEach(authority -> {
-//                authorities.add(authority::getName);
-//            });
-//        });
-//
-//        return authorities;
+        List<GrantedAuthority> authorities = new ArrayList<>();
 
-        return user.getRoles();
+        user.getRoles().forEach(role -> {
+            authorities.add(role);
+            role.getAuthorities().forEach(authority -> {
+                authorities.add(authority::getName);
+            });
+        });
 
+        return authorities;
 
     }
 

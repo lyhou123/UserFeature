@@ -1,5 +1,4 @@
 package org.project.user.feature.user.service;
-
 import lombok.RequiredArgsConstructor;
 import org.project.user.feature.user.dto.UserRequest;
 import org.project.user.feature.user.dto.UserResponse;
@@ -10,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
-
+import java.util.Date;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
@@ -34,6 +33,7 @@ public class UserServiceImpl implements UserService{
 
          var user = userMapper.mapToUser(userRequest);
          user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+         user.setCreatedDate(new Date());
         return userMapper.mapToUserResponse(userRepository.save(user));
 
     }
