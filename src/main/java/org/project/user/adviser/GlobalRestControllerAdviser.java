@@ -32,18 +32,9 @@ public class GlobalRestControllerAdviser {
                     errors.put(fieldError.getField(), fieldError.getDefaultMessage());
                 }
         );
-        return BaseResponse.readSuccess().badRequest().setMetadata(errors);
+        return BaseResponse.badRequest().setMetadata(errors);
     }
 
-
-
-    @ExceptionHandler()
-    public BaseResponse<?> handleDuplicateEntriesException() {
-        return BaseResponse
-                .badRequest()
-                .setMetadata("Duplicate entries");
-
-    }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
